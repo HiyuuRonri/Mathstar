@@ -34,7 +34,7 @@ class RegisterController extends Controller
     if (auth()->user()->role === 'pupil') {
         return route('games'); // Redirect pupils to the games list
     }
-    return '/home'; // Redirect teachers to the teacher dashboard
+    return '/student-stats'; // Redirect teachers to the teacher dashboard
 }
 
     /**

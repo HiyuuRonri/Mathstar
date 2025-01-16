@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const addQuestionButton = document.getElementById('add-question');
     const questionsContainer = document.getElementById('questions-container');
 
+    // Add new question functionality
     addQuestionButton.addEventListener('click', function () {
         const newQuestion = document.createElement('div');
         newQuestion.classList.add('question');
@@ -22,9 +23,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 <input type="radio" name="questions[${questionIndex}][is_correct]" value="0" class="form-check-input" required>
                 <label class="form-check-label">False</label>
             </div>
+
+            <!-- Delete Button -->
+            <button type="button" class="btn btn-danger btn-sm mt-2 delete-question">Delete</button>
         `;
 
         questionsContainer.appendChild(newQuestion);
         questionIndex++;
+
+        // Delete question functionality
+        const deleteButton = newQuestion.querySelector('.delete-question');
+        deleteButton.addEventListener('click', function () {
+            newQuestion.remove(); // Remove the question from DOM
+        });
     });
 });

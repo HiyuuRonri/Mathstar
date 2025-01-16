@@ -37,6 +37,14 @@
                     </a>
                     <span>STUDENT INFO</span>
                 </div> 
+
+                <!-- QUIZ DASHBOARD-->
+                <div class="ps-5 pe-5 pt-1 text-center">
+                    <a href="{{ route('info-quiz') }}" class="d-block">
+                        <img src="/svg/quiz_icon.svg" alt="QuizIcon"  style="height:41px;" class="pb-1">
+                    </a>
+                    <span>QUIZZES</span>
+                </div> 
                 @endif
 
         

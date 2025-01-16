@@ -2,22 +2,28 @@
 
 @section('content')
 
-<form method="GET" action="{{ route('register') }}">
+<div class="role-selection-container">
+    <form method="GET" action="{{ route('register') }}">
+        <div class="role-cards">
+            <label for="teacher" class="role-card">
+                <input type="radio" id="teacher" name="role" value="teacher" required>
+                <div class="role-image">
+                    <img src="/svg/teacher.png" alt="Teacher Icon">
+                </div>
+                <p class="role-title">I'm a Teacher</p>
+            </label>
 
-    <div class="row mb-3">
-        <label for="role" class="col-md-4 col-form-label text-md-end">Role</label>
-        <div class="col-md-6">
-            <select id="role" class="form-control" name="role" required>
-                <option value="teacher">Teacher</option>
-                <option value="pupil">Pupil</option>
-            </select>
+            <label for="pupil" class="role-card">
+                <input type="radio" id="pupil" name="role" value="pupil" required>
+                <div class="role-image">
+                    <img src="/svg/pupil.png" alt="Student Icon">
+                </div>
+                <p class="role-title">I'm a Student</p>
+            </label>
         </div>
-    </div>
-    <div class="row mb-0">
-        <div class="col-md-6 offset-md-4">
-            <button type="submit" class="btn btn-primary">Proceed</button>
-        </div>
-    </div>
-</form>
+
+        <button type="submit" class="btn btn-primary role-submit">Proceed</button>
+    </form>
+</div>
 
 @endsection

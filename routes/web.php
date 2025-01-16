@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\UserController;
+
 
 use HttpKernel;
 
@@ -38,7 +40,7 @@ Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':pupil'
     Route::get('games/game3', function () {
         return view('games.game3');
     })->name('game3');
-    
+
     Route::post('/submit-score', [ScoreController::class, 'submitScore']);
 });
 
@@ -49,9 +51,15 @@ Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':teache
         return view('teacher.createquiz');
     })->name('create-quiz');
 
-    Route::get('/student-stats', function () {
-        return view('teacher.studentinfo');
-    })->name('student-stats');
+    Route::get('/student-stats', [UserController::class, 'studentDashboard'])->name('student-stats');
+
+    Route::get('/info-quiz', [QuizController::class, 'dashboard'])->name('info-quiz');
+
+    Route::get('/quizzes/{quiz}/edit', [QuizController::class, 'edit'])->name('quizzes.edit');
+
+    Route::put('/quizzes/{quiz}', [QuizController::class, 'update'])->name('quizzes.update');
+
+    Route::delete('/quizzes/{quiz}', [QuizController::class, 'destroy'])->name('quizzes.destroy');
     
     Route::resource('quizzes', QuizController::class);
 });

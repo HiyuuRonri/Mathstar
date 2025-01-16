@@ -1,0 +1,80 @@
+.role-selection-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    font-family: $head-text;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        
+        .role-cards {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+
+            .role-card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 200px;
+                height: 200px;
+                background: white;
+                border-radius: 12px;
+                border: 2px solid transparent;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                /* Change border color on hover */
+                &:hover {
+                    border-color: #007bff;
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+                }
+
+                /* Change border color when focused or selected (via keyboard or mouse) */
+                input[type="radio"]:focus + &,
+                input[type="radio"]:checked + & {
+                    border-color: #007bff;
+                    background: #e0f0ff;
+                }
+
+                .role-image {
+                    width: 80px;
+                    height: 80px;
+                    margin-bottom: 0.5rem;
+
+                    img {
+                        max-width: 100%;
+                        border-radius: 50%;
+                    }
+                }
+
+                .role-title {
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                    color: #333;
+                }
+            }
+        }
+
+        .role-submit {
+            padding: 0.75rem 1.5rem;
+            background-color: #44B1AC;
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+
+            &:hover {
+                background-color: #0056b3;
+            }
+        }
+    }
+}
