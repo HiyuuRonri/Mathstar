@@ -122,4 +122,16 @@ public function update(Request $request, Quiz $quiz)
 
         return redirect()->route('info-quiz')->with('success', 'Quiz deleted successfully!');
     }
+    public function getOnlyQuestions(Quiz $quiz)
+    {
+        // Fetch the most recent quiz
+        $quiz = Quiz::latest()->first(); // Get the latest quiz
+        // Fetch only the questions associated with the quiz
+        $questions = $quiz->questions()->select('id', 'question_text', 'is_correct')->get();
+    
+        // Return the questions inside a 'data' key as a JSON object
+        return response()->json([
+            'data' => $questions
+        ], 200);
+    }
 }

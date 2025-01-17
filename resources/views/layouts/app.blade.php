@@ -17,7 +17,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     
 </head>
-<body class="{{ Route::currentRouteName() }} {{ request()->is('games/*') ? 'games' : '' }}">
+<body class="{{ Route::currentRouteName() }} {{ request()->is('games/*') ? 'games' : '' }}" style="background-image: url('/svg/bg.svg');">
     <div id="app" class="d-flex flex-column min-vh-100">
         <!-- header -->
         @include('layouts.header')

@@ -3,28 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Quiz; // Assuming you want to associate score with a quiz
-use App\Models\Score; // A new model for storing scores
+use App\Models\Score; // Import the Score model
 
 class ScoreController extends Controller
 {
+    public function __construct()
+    {
+        // Use auth middleware to ensure the user is authenticated
+        $this->middleware('auth:sanctum'); // Adjust according to your authentication method (e.g., passport or sanctum)
+    }
+
     public function submitScore(Request $request)
     {
         // Validate incoming request
         $validated = $request->validate([
-            'username' => 'required|string|max:255',
-            'score' => 'required|integer',
+            'score' => 'required|integer', // Only score is required, username will be fetched from auth
         ]);
 
-        // Store the score in a new model (make sure to create a Score model)
+        // Fetch the authenticated user's username
+        $user = auth()->user();
+
+        // Store the score associated with the authenticated user
         $score = new Score();
-        $score->username = $validated['username'];
+        $score->username = $user->name; // Get the authenticated user's name
         $score->score = $validated['score'];
         $score->save();
 
+        // Return a success response
         return response()->json([
             'message' => 'Score submitted successfully!',
             'score' => $score,
-        ]);
+        ], 201); // 201 is the status code for resource creation
     }
 }
+

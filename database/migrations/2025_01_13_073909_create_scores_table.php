@@ -9,18 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('scores', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('game_id')->constrained('games')->onDelete('cascade');
-            $table->integer('score'); // User's score
-            $table->timestamps();
-    
-            $table->unique(['user_id', 'game_id']); // Ensures unique high scores per game and user
-        });
-    }
+    public function up()
+{
+    Schema::create('scores', function (Blueprint $table) {
+        $table->id();
+        $table->string('username'); // User's name
+        $table->integer('score');   // Score value
+        $table->timestamps();
+    });
+}
+
 
     /**
      * Reverse the migrations.

@@ -1,41 +1,57 @@
-/* _home.scss */
 body.home {
-    /* Main content container */
-    .container {
-      font-family: $title-text;
-      position: relative; /* Ensures content is above the blur overlay */
-      z-index: 2; /* Stacks above the blur */
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 20px;
-      padding: 30px;
-      max-width: 1500px;
-      margin: 0 auto;
-  
-      h1 {
-        grid-column: 1 / span 5; /* Make it span 5 columns */
-        color: #087CC3;
-        margin-bottom: -15px; /* Reduce space between heading and cards */
-        margin-top: 15px;
-      }
-      a{text-decoration: none;}
-      /* Individual cards */
-      .card {
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-        color: white;
-        font-size: 25px;
-        text-align: center;
-        padding: 29px;
-        border-radius: 2px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(5px);
-        transition: transform 0.2s, box-shadow 0.2s;
-        display: block;  
-        &:hover {
-          transform: scale(1.05);
-          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-        }
+  /* Main content container */
+  .container {
+    font-family: $title-text;
+    position: relative; /* Ensures content is above the blur overlay */
+    z-index: 2; /* Stacks above the blur */
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    gap: 20px; /* Add space between cards and heading */
+    padding: 30px;
+    max-width: 1200px; /* Adjust maximum width for better responsiveness */
+    margin: 0 auto;
+
+    h1 {
+      text-align: center; /* Center heading */
+      color: #087CC3;
+      margin-bottom: -15px; /* Reduce space between heading and cards */
+      margin-top: 15px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* Individual cards */
+    .card {
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+      color: white;
+      font-size: 25px;
+      text-align: center;
+      width: 300px; /* Fixed width for cards */
+      height: 200px; /* Fixed height for cards */
+      padding: 29px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex; /* Flexbox for card content */
+      align-items: center; /* Center content vertically */
+      justify-content: center; /* Center content horizontally */
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
       }
     }
   }
-  
+
+  .container-box2 {
+    display: flex; /* Flexbox for cards layout */
+    flex-wrap: wrap; /* Allow wrapping for responsive design */
+    justify-content: center; /* Center cards horizontally */
+    gap: 20px; /* Space between cards */
+  }
+}

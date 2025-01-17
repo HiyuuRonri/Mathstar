@@ -7,11 +7,12 @@ use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\UserController;
 
 
-use HttpKernel;
 
 Route::get('/', function () {
-    return view('welcome'); // Or any other homepage view you have
+    return view('layouts.homep'); // Or any other homepage view you have
 });
+// Redirect /register to /register/role
+Route::redirect('/register', '/register/role');
 
 // Ensure this line is above Auth routes to avoid conflict
 Route::get('register/role', function(){
@@ -19,9 +20,6 @@ Route::get('register/role', function(){
 })->name('role');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 
 // Games exclusive for pupils
 Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':pupil'])->group(function () {
@@ -41,7 +39,6 @@ Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':pupil'
         return view('games.game3');
     })->name('game3');
 
-    Route::post('/submit-score', [ScoreController::class, 'submitScore']);
 });
 
 

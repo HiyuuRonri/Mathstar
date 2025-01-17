@@ -14,7 +14,7 @@
 </head>
 
 <div class="games-page">
-    <h1>Game 1 - Brick Game</h1>
+    <h1>Game 2 - Brick Game</h1>
 
     <div class="thegame">
         <!-- Unity Game Section -->
@@ -23,14 +23,14 @@
         </div>
 
         <!-- Leaderboard Section -->
-        <div class="leaderboard">
-            <h2>LEADERBOARD</h2>
+        <!-- <div class="leaderboard">
+            <h2>LEADERBOARD</h2> -->
         <!-- Include the external JavaScript file -->
-        <script>
+        <!-- <script>
         window.username = "{{ auth()->user()->name }}";
         </script>
         <script src="{{ asset('/js/leaderboard.js') }}"></script>
         </div>
-    </div>
+    </div> -->
 </div>
 @endsection
