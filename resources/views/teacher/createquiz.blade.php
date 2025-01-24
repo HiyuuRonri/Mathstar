@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container transparent-container">
     <h1>Create a New Quiz</h1>
     <form action="{{ route('quizzes.store') }}" method="POST">
         @csrf
@@ -38,11 +38,15 @@
             </div>
         </div>
 
-        <!-- Add Question Button -->
-        <button type="button" class="btn btn-primary" id="add-question">Add Question</button>
 
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-success mt-3">Save Quiz</button>
+        <!-- Buttons Section -->
+        <div class="d-flex gap-2 mt-3">
+            <!-- Add Question Button -->
+            <button type="button" class="btn btn-primary" id="add-question">Add Question</button>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success">Save Quiz</button>
+        </div>
     </form>
 </div>
 

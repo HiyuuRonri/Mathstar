@@ -5,24 +5,40 @@ use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\AccountController;
+use App\Mail\NewUserWelcomeEmail;
 
 
 Route::get('/', function () {
     return view('layouts.homep'); // Or any other homepage view you have
 });
-// Redirect /register to /register/role
-Route::redirect('/register', '/register/role');
+
+
 
 // Ensure this line is above Auth routes to avoid conflict
 Route::get('register/role', function(){
     return view('auth.role');
 })->name('role');
 
-Auth::routes();
+// Redirect /register to /register/role
+Route::get('/register', function(){
+    return redirect('/register/role');
+});
+Auth::routes([
+    'verify'=>true
+]);
+//account deletion
+Route::middleware('auth')->group(function () {
+    Route::delete('/account/delete', [AccountController::class, 'destroy'])->name('account.destroy');
+});
+
+Route::get('/recover-account/{email}', [AccountController::class, 'recover'])->name('account.recover');
+
+
+
 
 // Games exclusive for pupils
-Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':pupil'])->group(function () {
+Route::middleware(['auth','verified', \App\Http\Middleware\RoleMiddleware::class . ':pupil'])->group(function () {
     Route::get('/games', function () {
         return view('games.games');
     })->name('games');
@@ -43,7 +59,7 @@ Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':pupil'
 
 
 // Teacher views
-Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':teacher'])->group(function () {
+Route::middleware(['auth','verified', \App\Http\Middleware\RoleMiddleware::class . ':teacher'])->group(function () {
     Route::get('/create-quiz', function () {
         return view('teacher.createquiz');
     })->name('create-quiz');

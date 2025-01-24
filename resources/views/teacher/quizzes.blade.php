@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container transparent-container">
     <h1 class="my-4">Teacher Dashboard</h1>
 
     @if (session('success'))

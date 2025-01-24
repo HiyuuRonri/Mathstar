@@ -87,10 +87,22 @@
                                     document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
-
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
+                        <a class="dropdown-item" href="{{ route('account.destroy') }}"
+                             onclick="event.preventDefault();
+                             if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                                document.getElementById('delete-account-form').submit();
+                            }">
+                            {{ __('Delete Account') }}
+                        </a>
+                        <form id="delete-account-form" action="{{ route('account.destroy') }}" method="POST" style="display: none;">
+                        @csrf
+                        @method('DELETE')
+                        </form>
+                        
+
                     </div>
                 </li>
             @endguest

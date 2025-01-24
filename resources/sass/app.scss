@@ -21,9 +21,7 @@
     z-index: 3; /* Above the blur overlay */
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    
-    
+    justify-content: space-between; 
     
     span {
         font-size: 16px;
@@ -34,53 +32,63 @@
         padding-right: 45px;
     }
 
-    a {
-        color: white; /* Set default color to white */
+#navbarDropdown, a.nav-link{
+        color:white;
         text-decoration: none;
-
-        &:hover {
-            color: #343434; /* Set hover color */
-        }
-    }
-    #search {
-        background-color: $mathstar-blue; /* Blue background */
-        border: 2px solid white; /* White border outline */
-        border-radius: 50px; /* Makes the input field circular */
-        color: white; /* White text */
-        padding: 10px 20px; /* Adjust the padding for the input */
-        width: 100%; /* Ensures the input takes full width */
-        transition: border-color 0.3s ease, background-color 0.3s ease;
-    
-        &::placeholder {
-            color: white; /* Placeholder text color */
-        }
-    
-        &:focus {
-            background-color: $mathstar-blue; /* Darker blue when focused */
-            border-color: #ffffff; /* Keep the white border on focus */
-            outline: none; /* Remove the default browser focus outline */
-        }
-    
-        /* Optional: Add a subtle shadow when focused */
-        &:focus-visible {
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-        }
-    }
+      }
+      transition: background-color 0.5s ease; // Smooth color change
 }
 
+body.teacher-role {
+  // Apply styles for the header
+  .header {
+    background-color: $mathstar-darkorange;
+  }
+
+  // Apply buttons for teacher side
+  .btn {
+    &.btn-success {
+      background-color: $mathstar-darkorange;
+      border-color: $mathstar-darkorange;
+  
+      &:hover, &:focus {
+        background-color: darken($mathstar-darkorange, 10%);
+        border-color: darken($mathstar-darkorange, 10%);
+      }
+    }
+  
+    &.btn-primary {
+      background-color: $mathstar-lightorange;
+      border-color: $mathstar-lightorange;
+  
+      &:hover, &:focus {
+        background-color: darken($mathstar-lightorange, 10%);
+        border-color: darken($mathstar-lightorange, 10%);
+      }
+    }
+  }
+  
+  
+}
+
+body.teacher-role::before {
+  transition: background-color 0.5s ease; // Smooth color change
+  background-color: $mathstar-lightorange;
+  box-shadow: 0 0 15px 8px $mathstar-lightorange;
+}
 body {
     position: relative; /* Ensures ::before is positioned relative to the body */
-    background-image: url("/svg/bg.svg"); /*IDK WHY it works as absolute*/
+    background-image: url("/svg/bg.svg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    font-family: $head-text;
     display: flex;
     height: 100%;
     margin: 0;
     flex-direction: column; /* Allows proper stacking of header, content, and footer */
     h1{
-        color:black;
         font-family: $title-text;
     }
   }
@@ -102,6 +110,7 @@ body {
     backdrop-filter: blur(8px); /* Adds blur to the overlay */
     box-shadow: 0 0 15px 8px rgba(181, 236, 241, 0.916);
     z-index: 1; /* Places the overlay above the background image */
+    transition: background-color 0.5s ease; // Smooth color change
   }
   
   //for logging in and out
@@ -199,3 +208,7 @@ body {
       align-items: center;
     }
 }
+
+
+
+

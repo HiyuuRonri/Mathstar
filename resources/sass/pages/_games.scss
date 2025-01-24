@@ -1,21 +1,20 @@
 .games-page {
     font-family: $title-text;
-
     h1 {
         color: $mathstar-blue;
         text-shadow: $outlined;
         margin-left: 20px;
         font-size: 2rem;
+        text-align: center;
     }
 
     .thegame {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         padding: 25px;
 
         .game-container {
             width: 800px;
-            height: 600px;
             background-color: white;
             border: 2px solid $mathstar-blue;
             border-radius: 10px;

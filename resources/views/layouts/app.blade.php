@@ -17,13 +17,18 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     
 </head>
-<body class="{{ Route::currentRouteName() }} {{ request()->is('games/*') ? 'games' : '' }}" style="background-image: url('/svg/bg.svg');">
+<body class="{{ Route::currentRouteName() }} {{ request()->is('games/*') ? 'games' : '' }}
+            {{auth()->check()&&auth()->user()->role==='teacher' ? 'teacher-role':''}}"
+            style="background-image: url('/svg/bg.svg');">
     <div id="app" class="d-flex flex-column min-vh-100">
         <!-- header -->
         @include('layouts.header')
         
         <main class="flex-fill py-4">  
-        @yield('content')   
+
+        <div id="fade-container">
+        @yield('content')
+        </div>   
         </main>
 
         @if(Route::currentRouteName() === 'home')
@@ -37,3 +42,5 @@
     @stack('scripts')
 </body>
 </html>
+
+

@@ -86,3 +86,26 @@
     display:flex;
     margin: 25px;
 }
+// Styling for the container with dark transparent background
+.transparent-container {
+    background-color: rgba(0, 0, 0, 0.7); // Dark transparent background
+    border-radius: 15px;                 // Rounded corners for soft edges
+    padding: 20px;                       // Add padding inside the container
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); // Subtle shadow for depth
+    color: #fff;                         // Ensure text is visible against dark background
+    h5{
+        padding-top: 15px;
+    }
+  }
+
+  .transparent-container2 {
+    background-color: rgba(255, 255, 255, 0.7); // Dark transparent background
+    border-radius: 15px;                 // Rounded corners for soft edges
+    padding: 20px;                       // Add padding inside the container
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); // Subtle shadow for depth
+    color: #333333;                         // Ensure text is visible against dark background
+    h5{
+        padding-top: 15px;
+    }
+  }
+  

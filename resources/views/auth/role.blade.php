@@ -16,14 +16,33 @@
             <label for="pupil" class="role-card">
                 <input type="radio" id="pupil" name="role" value="pupil" required>
                 <div class="role-image">
-                    <img src="/svg/pupil.png" alt="Student Icon">
+                    <img src="/svg/pupil.png" alt="Pupil Icon">
                 </div>
-                <p class="role-title">I'm a Student</p>
+                <p class="role-title">I'm a Pupil</p>
             </label>
         </div>
 
-        <button type="submit" class="btn btn-primary role-submit">Proceed</button>
+        <button type="submit" class="btn btn-success role-submit">Proceed</button>
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const teacherRadio = document.getElementById('teacher');
+        const pupilRadio = document.getElementById('pupil');
+
+        teacherRadio.addEventListener('change', () => {
+            if (teacherRadio.checked) {
+                document.body.classList.add('teacher-role');
+            }
+        });
+
+        pupilRadio.addEventListener('change', () => {
+            if (pupilRadio.checked) {
+                document.body.classList.remove('teacher-role');
+            }
+        });
+    });
+</script>
 
 @endsection

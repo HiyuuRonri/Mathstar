@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container text-center mt-5">
-    
+<div class="container transparent-container2 text-center mt-5">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if(Auth::check() && Auth::user()->trashed())
+    <p>Your account is in a deleted state. You can recover it within 24 hours:</p>
+    <a href="{{ route('account.recover', ['email' => Auth::user()->email]) }}">Recover Account</a>
+    @endif
+
     <!-- Welcome Title -->
     <h1 class="display-4 fw-bold">Welcome to MathStar</h1>
     <p class="lead text-muted">Where Learning Meets Fun! Gamify your quizzes and make education engaging.</p>

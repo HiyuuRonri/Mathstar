@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container transparent-container">
     <h1 class="my-4">Edit Quiz</h1>
 
     @if (session('success'))
@@ -51,10 +51,11 @@
                 </div>
             @endforeach
         </div>
-
-        <button type="button" id="add-question" class="btn btn-secondary mt-3">Add Question</button>
-        <button type="submit" class="btn btn-success mt-3">Save Changes</button>
-        <a href="{{ route('info-quiz') }}" class="btn btn-secondary mt-3">Back</a>
+        <div class="d-flex gap-2 mt-3">
+            <button type="button" id="add-question" class="btn btn-primary mt-3">Add Question</button>
+            <button type="submit" class="btn btn-success mt-3">Save Changes</button>
+            <a href="{{ route('info-quiz') }}" class="btn btn-secondary mt-3">Back</a>
+        </div>
     </form>
 </div>
 
