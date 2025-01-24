@@ -8,6 +8,8 @@ use App\Models\Classroom;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+
 
 class RegisterController extends Controller
 {
@@ -30,12 +32,14 @@ class RegisterController extends Controller
      * @var string
      */
     protected function redirectTo()
-{
-    if (auth()->user()->role === 'pupil') {
-        return route('games'); // Redirect pupils to the games list
+    {
+        if (auth()->user()->role === 'admin') {
+            return '/admin-dashboard'; // Redirect admins to the admin dashboard
+        } elseif (auth()->user()->role === 'pupil') {
+            return route('games'); // Redirect pupils to the games list
+        }
+        return '/student-stats'; // Redirect teachers to the teacher dashboard
     }
-    return '/student-stats'; // Redirect teachers to the teacher dashboard
-}
 
     /**
      * Create a new controller instance.
@@ -55,16 +59,26 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $adminPassword = DB::table('users')
+            ->where('role', 'admin')
+            ->value('registration_password');
+
         $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required', 'string', 'in:teacher,pupil'],
+            'registration_password' => ['required', 'string', function ($attribute, $value, $fail) use ($adminPassword) {
+                if (!Hash::check($value, $adminPassword)) {
+                    $fail('The registration password is incorrect.');
+                }
+            }],
         ];
 
         return Validator::make($data, $rules);
     }
+
 
 
     /**

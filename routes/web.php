@@ -6,6 +6,7 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
 use App\Mail\NewUserWelcomeEmail;
 
 
@@ -27,14 +28,13 @@ Route::get('/register', function(){
 Auth::routes([
     'verify'=>true
 ]);
+
 //account deletion
 Route::middleware('auth')->group(function () {
     Route::delete('/account/delete', [AccountController::class, 'destroy'])->name('account.destroy');
 });
 
 Route::get('/recover-account/{email}', [AccountController::class, 'recover'])->name('account.recover');
-
-
 
 
 // Games exclusive for pupils
@@ -81,4 +81,11 @@ Route::middleware(['auth','verified', \App\Http\Middleware\RoleMiddleware::class
 Route::prefix('leaderboard')->group(function () {
     Route::get('/', [LeaderboardController::class, 'index'])->name('leaderboard.index');
     Route::post('/', [LeaderboardController::class, 'store'])->name('leaderboard.store');
+});
+
+//admin page
+Route::middleware(['auth','verified', \App\Http\Middleware\AdminMiddleware::class . ':admin' ])->group(function () {
+    Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::delete('/admin/delete-user/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+    Route::post('/admin-dashboard/set-registration-password', [AdminController::class, 'setRegistrationPassword'])->name('admin.setRegistrationPassword');
 });

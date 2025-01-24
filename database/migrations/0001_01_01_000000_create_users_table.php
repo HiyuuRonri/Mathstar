@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('registration_password')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -36,7 +37,21 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
+            
         });
+        // Seed admin user
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'username' => 'admin',
+            'role' => 'admin',
+            'password' => Hash::make('admin12345'),
+            'registration_password' => Hash::make('unique_registration_password'), 
+            'email_verified_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        
     }
 
     /**

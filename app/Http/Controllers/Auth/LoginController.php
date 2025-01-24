@@ -46,6 +46,8 @@ class LoginController extends Controller
             return redirect('/student-stats'); // Redirect teachers to the dashboard
         } elseif ($user->role === 'pupil') {
             return redirect('/games'); // Redirect pupils to the games page
+        }   elseif ($user->role === 'admin') {
+            return redirect('admin-dashboard'); // Redirect pupils to the games page
         }
 
         // Default redirection for other roles

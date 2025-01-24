@@ -13,8 +13,11 @@
 
         <!-- MATH STAR LOGO -->
         <div class="ps-5 pe-5 pt-2">
-            <a href="{{ auth()->check() && auth()->user()->role === 'teacher' ? route('student-stats') : route('games') }}">
-                <img src="/svg/MathStarLogo.svg" alt="MSLogo">
+            <a href="{{ 
+                auth()->check() && auth()->user()->role === 'teacher' ? route('student-stats') : 
+                (auth()->check() && auth()->user()->role === 'admin' ? route('admin.dashboard') : route('games'))
+            }}">
+            <img src="/svg/MathStarLogo.svg" alt="MSLogo">
             </a>
         </div>
 
@@ -54,6 +57,14 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
+        @if(auth()->check() && auth()->user()->role === 'admin')
+            <div class="ps-5 pe-5 pt-1 text-center">
+                <a href="{{ route('admin.dashboard') }}" class="d-block">
+                    <img src="/svg/setting_icon.svg" alt="GearIcon" style="height:41px;" class="pb-1">
+                </a>
+                <span>DASHBOARD</span>
+            </div>
+        @endif
     @endif
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
