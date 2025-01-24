@@ -11,7 +11,7 @@ Before you begin, ensure the following are installed on your machine:
 2. **Composer** (latest version)
 3. **Laravel** (CLI tool, optional but recommended)
 4. **Git**
-5. **XAMPP**(MySQL, PostgreSQL, or the one specified in the project requirements)
+5. **XAMPP**(MySQL it must support PHP version 8.2)
 6. **Node.js and npm** (for frontend dependencies)
 
 ---
