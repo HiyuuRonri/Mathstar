@@ -87,35 +87,37 @@
                     </li>
                 @endif
             @else
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->username }}
-                    </a>
+                    <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->username }}
+            </a>
 
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                        <a class="dropdown-item" href="{{ route('account.destroy') }}"
-                             onclick="event.preventDefault();
-                             if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-                                document.getElementById('delete-account-form').submit();
-                            }">
-                            {{ __('Delete Account') }}
-                        </a>
-                        <form id="delete-account-form" action="{{ route('account.destroy') }}" method="POST" style="display: none;">
-                        @csrf
-                        @method('DELETE')
-                        </form>
-                        
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
 
-                    </div>
-                </li>
+                @if(Auth::user()->role !== 'admin')
+                <a class="dropdown-item" href="{{ route('account.destroy') }}"
+                    onclick="event.preventDefault();
+                    if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                        document.getElementById('delete-account-form').submit();
+                    }">
+                    {{ __('Delete Account') }}
+                </a>
+                <form id="delete-account-form" action="{{ route('account.destroy') }}" method="POST" style="display: none;">
+                    @csrf
+                    @method('DELETE')
+                </form>
+                @endif
+            </div>
+        </li>
+
             @endguest
         </ul>
     </div>

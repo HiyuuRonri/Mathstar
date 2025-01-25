@@ -40,16 +40,13 @@ class AdminController extends Controller
     }
     public function deleteUser($id)
     {
-        // Fetch the user to be deleted
-        $user = User::findOrFail($id);
+        $user = User::onlyTrashed()->findOrFail($id);
+        $user->restore();
 
         // Prevent deletion of admin
         if ($user->role === 'admin') {
             return redirect()->route('admin.dashboard')->with('error', 'Admin users cannot be deleted.');
         }
-
-        // Delete the user
-        $user->delete();
 
         return redirect()->route('admin.dashboard')->with('success', 'User deleted successfully.');
     }
